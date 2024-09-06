@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Spectrovate</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-container .form-group {
+      margin-bottom: 15px;
+    }
+
+    .login-container .btn-group {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .login-container .btn-group label {
+      flex: 1;
+    }
+
+    .login-container .btn-group input[type="radio"] {
+      display: none;
+    }
+
+    .login-container .btn-group label.btn {
+      cursor: pointer;
+      padding: 10px 20px;
+      color: white;
+      background-color: black;
+      border: 1px solid black;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .login-container .btn-group input[type="radio"]:checked + label.btn {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .login-container .btn-group input[type="radio"]:not(:checked) + label.btn {
+      background-color: black;
+    }
+
+    .login-container .btn {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section starts -->
+    <header class="header_section --black">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <img src="images/logo.png" alt="">
+            <span>Spectrovate</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav">
+                <li class="nav-item active"><a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
+              </ul>
+            </div>
+            <div class="quote_btn-container d-flex justify-content-center">
+              <a href="index.html" class="btn text-white rounded px-4 py-2" style="background-color: #111; border-radius: 10px;">SIGN UP</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="#" class="btn text-white rounded px-4 py-2" style="background-color: #111; border-radius: 10px;">LOGIN</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+    <!-- login section -->
+    <section class="login_section layout_padding">
+      <div class="container">
+        <div class="login-container">
+          <h2>Login</h2>
+          <form id="loginForm" action="validate-login.php" method="post">
+            <div class="form-group">
+              <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="form-group btn-group">
+              <input type="radio" id="researcher" name="profession" value="researcher">
+              <label for="researcher" class="btn">Researchers</label>
+              <input type="radio" id="investor" name="profession" value="investor">
+              <label for="investor" class="btn">Investors</label>
+              <input type="radio" id="startup" name="profession" value="startup">
+              <label for="startup" class="btn">Startups</label>
+            </div>
+            <button type="submit" class="btn btn-dark">Login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- end login section -->
+
+  </div>
+
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      // Get the selected profession
+      var profession = document.querySelector('input[name="profession"]:checked');
+      
+      if (profession) {
+        // Prevent form submission for validation
+        event.preventDefault();
+        
+        // Get form data
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var professionValue = profession.value;
+        
+        // Determine the correct JSON file to use based on the selected profession
+        var jsonFile = '';
+        var landingPage = '';
+        if (professionValue === 'startup') {
+          jsonFile = '1Startup/details.json'; // Path for startups
+          landingPage = '1Startup/startup.html'; // Landing page for startups
+        } else if (professionValue === 'investor') {
+          jsonFile = '2Investors/details.json'; // Path for investors
+          landingPage = '2Investors/investor.html'; // Landing page for investors
+        } else {
+          jsonFile = '3Researchers/details.json'; // Path for researchers
+          landingPage = '3Researchers/research.html'; // Landing page for researchers
+        }
+        
+        // Make an AJAX request to validate the credentials
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'validate-login.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            if (xhr.responseText === 'success') {
+              window.location.href = landingPage; // Redirect based on profession
+            } else {
+              alert('Invalid email or password.');
+            }
+          } else {
+            alert('An error occurred while processing your request.');
+          }
+        };
+        xhr.send('email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password) + '&jsonFile=' + encodeURIComponent(jsonFile));
+      } else {
+        alert('Please select a profession.');
+      }
+    });
+  </script>
+</body>
+
+</html>
